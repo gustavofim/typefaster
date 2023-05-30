@@ -1,7 +1,20 @@
-text = 'A bunch of pips and pops'
+text = `A line and\nanother
+and another`
 
 function format(word) {
-  return `<span class="letter">${word.split('').join('</span><span class="letter">')}</span>`;
+    //ret = `<span class="letter">${word.split('').join('</span><span class="letter">')}</span>`
+    //ret.replace(/\n/g, '<br>')
+    ret = '<span class="letter">'
+    word.split('').forEach(function (item) {
+        if (item != '\n') {
+            ret += item
+        } else {
+            ret += '↲<br>'
+        }
+        ret += '</span><span class="letter">'
+    })
+    ret += '</span>'
+    return ret
 }
 
 function newGame() {
@@ -15,7 +28,7 @@ function newGame() {
     error = 0
 }
 
-document.getElementById('overrides').addEventListener('keydown', ev => {
+document.getElementById('typing-test').addEventListener('keydown', ev => {
 
     const cur = all[currentLetter]
 
@@ -24,14 +37,14 @@ document.getElementById('overrides').addEventListener('keydown', ev => {
     const key = ev.key;
     const isLetter = /^[a-zA-Z ]$/i.test(key)
 
-    if (!isLetter && key != 'Backspace') return
+    if (!isLetter && key != 'Backspace' && key != 'Enter') return
 
     console.log(key)
 
-    if (isLetter) {
+    if (isLetter || key === 'Enter') {
         currentLetter += 1
 
-        if (key === cur.innerHTML) {
+        if (key === cur.innerHTML || (key === 'Enter' && cur.innerHTML === '↲<br>')) {
             cur.className = 'letter correct'
             correct += 1
         } else {
@@ -44,7 +57,7 @@ document.getElementById('overrides').addEventListener('keydown', ev => {
         if (currentLetter < numLetters) {
             all[currentLetter].className += ' current'
         }
-    } else {
+    } else if (key === 'Backspace') {
         if (currentLetter === 0) return
 
         currentLetter -= 1
