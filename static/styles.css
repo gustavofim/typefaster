@@ -4,12 +4,46 @@
     --fgColorGame: #504945;
     --cursorColor: #b16286;
     --errorColor: #fb4934;
+    --borderColor: #665c54;
+    --yellowColor: #d79921;
+    --blueColor: #458588;
 }
 
 body {
     color: var(--fgColor);
     background-color: var(--bgColor);
     font-size: x-large;
+}
+
+.btn {
+    color: var(--fgColor);
+    border-color: var(--borderColor);
+}
+
+.card {
+    color: var(--fgColor);
+    background-color: var(--bgColor);
+    border-color: var(--borderColor);
+    font-size: x-large;
+}
+
+.card-header {
+    color: var(--fgColor);
+    background-color: var(--bgColor);
+    border-color: var(--borderColor);
+    font-size: x-large;
+}
+
+.form-control {
+    color: var(--fgColor);
+    border-color: var(--borderColor);
+    background-color: var(--fgColorGame);
+}
+
+.input-group-text {
+    color: var(--fgColor);
+    border-color: var(--borderColor);
+    background-color: var(--bgColor);
 }
 
 .letter.current {
@@ -31,4 +65,15 @@ body {
 
 #game {
     color: var(--fgColorGame);
+    outline: none;
+}
+
+#restart-btn {
+  border-color: var(--yellowColor);
+  --bs-btn-hover-bg: var(--yellowColor);
+}
+
+#save-btn {
+  border-color: var(--blueColor);
+  --bs-btn-hover-bg: var(--blueColor);
 }
