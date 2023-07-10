@@ -2,6 +2,6 @@ class Player {
   constructor(name) {
     this.name = name
     this.scoreHistory = []
-    this.savedTexts = []
+    this.savedTexts = {}
   }
 }

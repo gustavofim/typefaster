@@ -3,10 +3,11 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const { readFile } = require('fs').promises
-const port = 3000
 
 const { Configuration, OpenAIApi } = require("openai")
 require("dotenv").config()
+
+const port = process.env.PORT
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -33,12 +34,14 @@ io.on('connection', (socket) => {
           model: "gpt-3.5-turbo",
           messages: [{
             "role": "user",
-            "content": "a short (maximum 15 lines of code) " + lang + " code"
+            "content": "a short (maximum 15 lines of code) " + lang + " code, inside a code block"
           }],
         });
         let completion_text = completion.data.choices[0].message.content;
         console.log(completion_text)
-        let msg = completion_text.split('```' + lang)[1].split('```')[0].trim()
+        // let msg = completion_text.split(/```[^\s]*/)[1].split('```')[0].trim()
+        let msg = completion_text.split(/```[^\s]*/)[1].trim()
+        // let msg = completion_text.split(/```[^\s]*/)
         // console.log(msg)
         // console.log("hoooo")
         socket.emit('get-code', msg)
@@ -58,5 +61,5 @@ io.on('connection', (socket) => {
 })
 
 server.listen(port, () => {
-  console.log(`Server listening on port http://localhost:${port}`)
+  console.log(`Server listening on http://localhost:${port}`)
 })

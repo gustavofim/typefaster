@@ -1,71 +1,75 @@
 :root{
-    --bgColor: #282828;
-    --fgColor: #ebdbb2;
-    --fgColorGame: #504945;
-    --cursorColor: #b16286;
-    --errorColor: #fb4934;
-    --borderColor: #665c54;
-    --yellowColor: #d79921;
-    --blueColor: #458588;
+  --bgColor: #282828;
+  --fgColor: #ebdbb2;
+  --fgColorGame: #504945;
+  --cursorColor: #b16286;
+  --errorColor: #fb4934;
+  --borderColor: #665c54;
+  --yellowColor: #d79921;
+  --blueColor: #458588;
+  --redColor: #fb4934;
+  --greenColor: #98971a;
 }
 
 body {
-    color: var(--fgColor);
-    background-color: var(--bgColor);
-    font-size: x-large;
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  font-size: x-large;
 }
 
 .btn {
-    color: var(--fgColor);
-    border-color: var(--borderColor);
+  color: var(--fgColor);
+  border-color: var(--borderColor);
+  --bs-btn-hover-bg: var(--fgColor);
+  --bs-btn-hover-color: var(--bgColor);
 }
 
 .card {
-    color: var(--fgColor);
-    background-color: var(--bgColor);
-    border-color: var(--borderColor);
-    font-size: x-large;
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+  font-size: x-large;
 }
 
 .card-header {
-    color: var(--fgColor);
-    background-color: var(--bgColor);
-    border-color: var(--borderColor);
-    font-size: x-large;
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+  font-size: x-large;
 }
 
 .form-control {
-    color: var(--fgColor);
-    border-color: var(--borderColor);
-    background-color: var(--fgColorGame);
+  color: var(--fgColor);
+  border-color: var(--borderColor);
+  background-color: var(--fgColorGame);
 }
 
 .input-group-text {
-    color: var(--fgColor);
-    border-color: var(--borderColor);
-    background-color: var(--bgColor);
+  color: var(--fgColor);
+  border-color: var(--borderColor);
+  background-color: var(--bgColor);
 }
 
 .letter.current {
-    background-color: var(--cursorColor);
+  background-color: var(--cursorColor);
 }
 
 .letter.correct {
-    color: var(--fgColor);
+  color: var(--fgColor);
 }
 
 .letter.error {
-    color: var(--errorColor);
+  color: var(--errorColor);
 }
 
 .letter.error.space {
-    background-color: var(--errorColor);
-    opacity: 50;
+  background-color: var(--errorColor);
+  opacity: 50;
 }
 
 #game {
-    color: var(--fgColorGame);
-    outline: none;
+  color: var(--fgColorGame);
+  outline: none;
 }
 
 #restart-btn {
@@ -74,6 +78,27 @@ body {
 }
 
 #save-btn {
+  border-color: var(--blueColor);
+  --bs-btn-hover-bg: var(--blueColor);
+}
+
+#myYellow {
+  color: var(--yellowColor);
+}
+
+#myBlue {
+  color: var(--blueColor);
+}
+
+#myRed {
+  color: var(--redColor);
+}
+
+#myGreen {
+  color: var(--greenColor);
+}
+
+#dd {
   border-color: var(--blueColor);
   --bs-btn-hover-bg: var(--blueColor);
 }
