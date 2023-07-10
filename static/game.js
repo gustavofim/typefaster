@@ -21,7 +21,7 @@ class Game {
     if (!this.defaultText) {
       this.defaultText = 'Saved text not found :('
     }
-    newGame()
+    this.newGame()
   }
 
   saveText() {
