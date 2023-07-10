@@ -1,13 +1,31 @@
 class Game {
   constructor() {
+    this.lang = null
+    this.socket = io()
+    this.socket.on('get-code', msg => this.newText(msg))
     document.getElementById('game').addEventListener('keydown', ev => this.keyPress(ev))
     document.getElementById('restart-btn').addEventListener('click', ev => this.newGame(ev))
-    this.newGame()
+    document.getElementById('save-btn').addEventListener('click', ev => this.teste(ev))
+    document.getElementById('lang-btn').addEventListener('click', ev => this.setLang(ev))
     this.dateTime = new Date()
+    this.defaultText = `A<>line-and\nanother\nand. {]another\nDone`
+    this.newGame()
+  }
+
+  newText(msg) {
+    console.log(msg)
+    this.defaultText = msg
+    this.newGame()
+  }
+
+  setLang() {
+    this.lang = document.getElementById('input-lang').value
+    this.socket.emit('req-lang', this.lang)
   }
 
   newGame() {
     let text = this.getText()
+    console.log(text)
     document.getElementById('game').innerHTML = this.format(text)
     this.all = document.querySelectorAll('.letter')
     this.currentLetter = 0;
@@ -20,21 +38,25 @@ class Game {
     this.time = 0
   }
 
-  gameOver() {
+  async gameOver() {
     document.getElementById('game').innerHTML = this.correct + '\n' + this.error + '<br>' + this.time
   }
 
   getText() {
-    return `A line and\nanother\nand another\nDone`
+    return this.defaultText
   }
 
   format(word) {
+    word = word.replaceAll("\t", "→")
+    word = word.replaceAll("    ", "→")
     let ret = '<span class="letter">'
     word.split('').forEach(function (item) {
-      if (item != '\n') {
+      if (item != '\n' && item != '→') {
         ret += item
-      } else {
+      } else if (item == '\n'){
         ret += '↲<br>'
+      } else {
+        ret += '→\xa0\xa0\xa0'
       }
       ret += '</span><span class="letter">'
     })
@@ -59,12 +81,17 @@ class Game {
 
     if (!cur) return
 
-    const key = ev.key;
-    const isLetter = /^[a-zA-Z ]$/i.test(key)
+    let key = ev.key
+    const isLetter = /^[a-zA-Z \.\-\{\}\[\]\,<>]$/i.test(key)
+    if (key === '<') {
+      key = '&lt;'
+    } else if (key === '>') {
+      key = '&gt;'
+    }
+
+    console.log(key, isLetter, cur.innerHTML)
 
     if (!isLetter && key != 'Backspace' && key != 'Enter') return
-
-    // console.log(key)
 
     if (isLetter || key === 'Enter') {
       this.currentLetter += 1
