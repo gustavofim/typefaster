@@ -7,7 +7,8 @@ const { readFile } = require('fs').promises
 const { Configuration, OpenAIApi } = require("openai")
 require("dotenv").config()
 
-const port = process.env.PORT
+
+const port = process.env.PORT || 3000
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,

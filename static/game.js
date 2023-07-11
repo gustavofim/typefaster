@@ -136,7 +136,7 @@ class Game {
     if (!cur) return
 
     let key = ev.key
-    const isLetter = /^[0-9a-zA-Z \.\-\{\}\[\]\,<>\=\+\/\\\;\:\(\)\#]$/i.test(key)
+    const isLetter = /^[0-9a-zA-Z \.\-\{\}\[\]\,<>\=\+\/\\\;\:\(\)\#\!\@\#\$\%\¨\&\*\_\']$/i.test(key)
     if (key === '<') {
       key = '&lt;'
     } else if (key === '>') {
