@@ -4,10 +4,16 @@ Typing test for programmers. Made with Node.js, express.js, socket.io and OpenAI
 
 ## Running the app
 - Make sure node is installed;
-- Create a `.env` file in the root directory of the project and define the `PORT` and the `OPENAI_API_KEY`;
+- Create a `.env` file in the root directory of the project and define the `PORT` and the `OPENAI_API_KEY` variables;
 - Run:
 
 ```bash
 npm install
 node .
 ```
+
+## Todo
+
+- Player permanece/authentication;
+- Better handling of openai queries;
+- Deployment?
