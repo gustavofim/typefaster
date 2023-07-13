@@ -16,7 +16,7 @@ class Game {
 
     this.updateSavedTexts()
 
-    this.defaultText = `A<>line-and\n\tanother\nand.    {]another\nDone`
+    this.defaultText = `Choose a programming language to type using the 'Input language'box\nThe code is generated via the OpenAi API, so it may take some time to load`
     this.newGame()
   }
 
