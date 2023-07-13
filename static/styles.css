@@ -1,3 +1,5 @@
+@keyframes blink { 0% { background-color:var(--bgColor); } 50% { background-color:var(--cursorColor); }}
+
 :root{
   --bgColor: #282828;
   --fgColor: #ebdbb2;
@@ -11,10 +13,27 @@
   --greenColor: #98971a;
 }
 
+select {
+  max-width: 250px;
+  overflow: hidden;
+  outline: none;
+}
+
+option {
+  max-width: 250px !important;
+  overflow: hidden;
+}
+
 body {
   color: var(--fgColor);
   background-color: var(--bgColor);
   font-size: x-large;
+}
+
+.form-select {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--redColor)
 }
 
 .btn {
@@ -44,14 +63,21 @@ body {
   background-color: var(--fgColorGame);
 }
 
-.input-group-text {
+#input-save {
   color: var(--fgColor);
-  border-color: var(--borderColor);
   background-color: var(--bgColor);
+  border-color: var(--blueColor);
+}
+
+#input-lang {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--greenColor);
 }
 
 .letter.current {
-  background-color: var(--cursorColor);
+  /* background-color: var(--cursorColor); */
+  animation: blink 1s infinite;
 }
 
 .letter.correct {
@@ -75,11 +101,17 @@ body {
 #restart-btn {
   border-color: var(--yellowColor);
   --bs-btn-hover-bg: var(--yellowColor);
+  width: 250px;
 }
 
 #save-btn {
   border-color: var(--blueColor);
   --bs-btn-hover-bg: var(--blueColor);
+}
+
+#lang-btn {
+  border-color: var(--greenColor);
+  --bs-btn-hover-bg: var(--greenColor);
 }
 
 #myYellow {
@@ -101,4 +133,8 @@ body {
 #dd {
   border-color: var(--blueColor);
   --bs-btn-hover-bg: var(--blueColor);
+}
+
+#title-cursor {
+  animation: blink 1s infinite;
 }

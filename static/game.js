@@ -2,22 +2,38 @@ class Game {
   constructor(player) {
     this.player = player
     this.lang = null
+
     this.socket = io()
     this.socket.on('get-code', msg => this.newText(msg))
     this.socket.on('get-error', msg => this.newError(msg))
+
     document.getElementById('game').addEventListener('keydown', ev => this.keyPress(ev))
     document.getElementById('restart-btn').addEventListener('click', ev => this.newGame(ev))
     document.getElementById('save-btn').addEventListener('click', ev => this.saveText(ev))
-    document.getElementById('load-btn').addEventListener('click', ev => this.loadText(ev))
+    // document.getElementById('load-btn').addEventListener('click', ev => this.loadText(ev))
     document.getElementById('lang-btn').addEventListener('click', ev => this.setLang(ev))
-    this.dateTime = new Date()
+    document.getElementById('saved-txts').addEventListener('change', ev => this.loadText(ev))
+
+    this.updateSavedTexts()
+
     this.defaultText = `A<>line-and\n\tanother\nand.    {]another\nDone`
     this.newGame()
   }
 
-  loadText() {
-    let loadName = document.getElementById('input-load').value
-    this.defaultText = this.player.savedTexts[loadName]
+  updateSavedTexts() {
+    const padding = '\xa0'
+    document.getElementById('saved-txts').innerHTML = `<option value="Saved texts">Saved texts${padding.repeat(30)}</option>` 
+    Object.keys(this.player.savedTexts).forEach(function(name) {
+      document.getElementById('saved-txts').innerHTML += `<option value="${name}">${name}</option>`
+    });
+  }
+
+  loadText(ev) {
+    if (ev.target.value === "Saved texts") {
+      return
+    }
+
+    this.defaultText = this.player.savedTexts[ev.target.value]
     if (!this.defaultText) {
       this.defaultText = 'Saved text not found :('
     }
@@ -26,10 +42,24 @@ class Game {
 
   saveText() {
     let saveName = document.getElementById('input-save').value
-    if (!saveName) {
+
+    if (!saveName || saveName === "Saved texts") {
       saveName = 'noName'
     }
+
+    let i = 0
+    let tryName = saveName
+    while (Object.keys(this.player.savedTexts).includes(tryName)) {
+      i += 1
+      tryName = saveName + i
+    }
+
+    console.log('hey')
+
+    saveName = tryName
+
     this.player.savedTexts[saveName] = this.defaultText
+    this.updateSavedTexts()
   }
 
   newText(msg) {
@@ -69,24 +99,33 @@ class Game {
   }
 
   async gameOver() {
-    let netWpm = (this.correct + this.error) / 5 / this.time
-    netWpm = Math.floor(netWpm)
+    let wpm = (this.correct + this.error) / 5 / this.time
+    wpm = Math.floor(wpm)
     let acc = this.correct / (this.correct + this.error) * 100
+
+    this.player.wpmHistory.push(wpm)
+    this.player.accHistory.push(acc)
+    this.player.numTests += 1
+
+    const bestWpm = Math.max(...this.player.wpmHistory)
+    const bestAcc = Math.max(...this.player.accHistory)
+
     document.getElementById('game').innerHTML = `<div class="card-group">
     <div class="card">
       <div class="card-body">
         <div class="card-header">Results</div>
         <div class="card-body">Correct: <span id="myGreen">${this.correct}</span>
-            Errors: <span id="myRed">${this.error}</span><br>WPM: <span id="myYellow"">${netWpm}</span>
+            Errors: <span id="myRed">${this.error}</span><br>WPM: <span id="myYellow"">${wpm}</span>
             Acuracy: <span id="myBlue">${acc.toFixed(2)}%</span></div>
       </div>
   </div>
     <div class="card">
       <div class="card-body">
-        <div class="card-header">All Time Stats</div>
+        <div class="card-header">All Time Best</div>
         <div class="card-body">
-            Avg WPM: <span id="myYellow"">${netWpm}</span><br>
-            Avg Acuracy: <span id="myBlue">${acc.toFixed(2)}%</span></div>
+            WPM: <span id="myYellow"">${bestWpm}</span><br>
+            Acuracy: <span id="myBlue">${bestAcc.toFixed(2)}%</span><br>
+            Tests Taken: <span id="myGreen">${this.player.numTests}</span></div>
       </div>
       </div>
   </div>
@@ -136,7 +175,7 @@ class Game {
     if (!cur) return
 
     let key = ev.key
-    const isLetter = /^[0-9a-zA-Z \.\-\{\}\[\]\,<>\=\+\/\\\;\:\(\)\#\!\@\#\$\%\¨\&\*\_\']$/i.test(key)
+    const isLetter = /^[0-9a-zA-Z \.\-\{\}\[\]\,<>\=\+\/\\\;\:\(\)\#\!\@\#\$\%\"\&\*\_\']$/i.test(key)
     if (key === '<') {
       key = '&lt;'
     } else if (key === '>') {
