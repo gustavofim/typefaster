@@ -7,6 +7,7 @@ class Game {
     this.socket.on('get-code', msg => this.newText(msg))
     this.socket.on('get-error', msg => this.newError(msg))
 
+    document.getElementById('start-btn').addEventListener('click', () => this.startGame())
     document.getElementById('game').addEventListener('keydown', ev => this.keyPress(ev))
     document.getElementById('restart-btn').addEventListener('click', ev => this.newGame(ev))
     document.getElementById('save-btn').addEventListener('click', ev => this.saveText(ev))
@@ -19,6 +20,19 @@ class Game {
     this.defaultText = `Choose a programming language to type using the 'Input language' box\nThe code is generated via the OpenAi API, so it may take some time to load`
     this.newGame()
   }
+
+  startGame() {
+    const playerName = document.getElementById('input-name').value
+    if (!playerName) {
+      alert('Please enter your name')
+      return
+    }
+
+    this.player.name = playerName
+    this.player.load()
+  
+  }
+
 
   updateSavedTexts() {
     const padding = '\xa0'
@@ -106,6 +120,7 @@ class Game {
     this.player.wpmHistory.push(wpm)
     this.player.accHistory.push(acc)
     this.player.numTests += 1
+    this.player.save()
 
     const bestWpm = Math.max(...this.player.wpmHistory)
     const bestAcc = Math.max(...this.player.accHistory)
@@ -130,6 +145,19 @@ class Game {
       </div>
   </div>
 </div>`
+
+
+
+const playerWpm = document.getElementById('player-wpm');
+  const playerAccuracy = document.getElementById('player-accuracy');
+  const playerTests = document.getElementById('player-tests');
+
+  playerWpm.textContent = `${wpm}`;
+  playerAccuracy.textContent = `${acc.toFixed(2)}%`;
+  playerTests.textContent = this.player.numTests;
+
+
+
   }
 
   getText() {
