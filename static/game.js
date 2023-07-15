@@ -27,7 +27,9 @@ class Game {
     document.getElementById('saved-txts').innerHTML = `<option value="Saved texts">Saved texts${padding.repeat(30)}</option>` 
     Object.keys(this.player.savedTexts).forEach(function(name) {
       document.getElementById('saved-txts').innerHTML += `<option value="${name}">${name}</option>`
-    });
+    })
+    this.player.save()
+
   }
 
   loadText(ev) {
