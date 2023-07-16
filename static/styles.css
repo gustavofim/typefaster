@@ -1,0 +1,161 @@
+@keyframes blink { 0% { background-color:var(--bgColor); } 50% { background-color:var(--cursorColor); }}
+
+:root{
+  --bgColor: #282828;
+  --fgColor: #ebdbb2;
+  --fgColorGame: #504945;
+  --cursorColor: #b16286;
+  --errorColor: #fb4934;
+  --borderColor: #665c54;
+  --yellowColor: #d79921;
+  --blueColor: #458588;
+  --redColor: #fb4934;
+  --greenColor: #98971a;
+}
+
+select {
+  max-width: 250px;
+  overflow: hidden;
+  outline: none;
+}
+
+option {
+  max-width: 250px !important;
+  overflow: hidden;
+}
+
+body {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  font-size: x-large;
+}
+
+.form-select {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--redColor)
+}
+
+.btn {
+  color: var(--fgColor);
+  border-color: var(--borderColor);
+  --bs-btn-hover-bg: var(--fgColor);
+  --bs-btn-hover-color: var(--bgColor);
+}
+
+.card {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+  font-size: x-large;
+}
+
+.text-body-secondary {
+  color: var(--fgColorGame);
+}
+
+#input-name {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+}
+
+#input-password {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+}
+
+#start-btn {
+  border-color: var(--blueColor);
+  --bs-btn-hover-bg: var(--blueColor);
+}
+
+.card-header {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+  font-size: x-large;
+}
+
+.form-control {
+  color: var(--fgColor);
+  border-color: var(--borderColor);
+  background-color: var(--fgColorGame);
+}
+
+#input-save {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--blueColor);
+}
+
+#input-lang {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--greenColor);
+}
+
+.letter.current {
+  /* background-color: var(--cursorColor); */
+  animation: blink 1s infinite;
+}
+
+.letter.correct {
+  color: var(--fgColor);
+}
+
+.letter.error {
+  color: var(--errorColor);
+}
+
+.letter.error.space {
+  background-color: var(--errorColor);
+  opacity: 50;
+}
+
+#game {
+  color: var(--fgColorGame);
+  outline: none;
+}
+
+#restart-btn {
+  border-color: var(--yellowColor);
+  --bs-btn-hover-bg: var(--yellowColor);
+  width: 250px;
+}
+
+#save-btn {
+  border-color: var(--blueColor);
+  --bs-btn-hover-bg: var(--blueColor);
+}
+
+#lang-btn {
+  border-color: var(--greenColor);
+  --bs-btn-hover-bg: var(--greenColor);
+}
+
+#myYellow {
+  color: var(--yellowColor);
+}
+
+#myBlue {
+  color: var(--blueColor);
+}
+
+#myRed {
+  color: var(--redColor);
+}
+
+#myGreen {
+  color: var(--greenColor);
+}
+
+#dd {
+  border-color: var(--blueColor);
+  --bs-btn-hover-bg: var(--blueColor);
+}
+
+#title-cursor {
+  animation: blink 1s infinite;
+}
