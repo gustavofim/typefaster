@@ -17,9 +17,37 @@
             <h1 class="text-center font-monospace">TypeFaster</h1>
             <div id="start-screen">
               <div class="text-center mt-3">
-                <input type="text" class="form-control" placeholder="Enter your name" id="input-name">
-                <input type="password" class="form-control" placeholder="Enter your password" id="input-password">
-                <button type="button" class="btn btn-primary mt-2" id="start-btn">Start Game</button>
+                <!-- <div class="input-group mb-3"> -->
+                <!--   <span class="input-group-text" id="basic-addon1">Username</span> -->
+                <!--   <input type="text" class="form-control" placeholder="Enter your name" id="input-name"> -->
+                <!-- </div> -->
+                <!-- <div class="input-group mb-3"> -->
+                <!--   <span class="input-group-text" id="basic-addon1">Password</span> -->
+                <!--   <input type="password" class="form-control" placeholder="Enter your password" id="input-password"> -->
+                <!-- </div> -->
+                <div class="card text-center w-50 mx-auto">
+                  <div class="card-header font-monospace">
+                  Sign in*
+                  </div>
+                <div class="card-body">
+                <div class="input-group mb-3 mx-auto w-75">
+                  <!-- <span class="input-group-text" id="basic-addon1">Username</span> -->
+                  <input type="text" class="form-control" placeholder="Enter your username" id="input-name">
+                </div>
+                <div class="input-group mb-3 mx-auto w-75">
+                  <!-- <span class="input-group-text" id="basic-addon1">Password</span> -->
+                  <input type="password" class="form-control" placeholder="Enter your password" id="input-password">
+                </div>
+                  <!-- <div class="input-group"> -->
+                  <!--   <span class="input-group-text">Sign In</span> -->
+                  <!--   <input type="text" aria-label="First name" class="form-control" id="input-name" placeholder="Username"> -->
+                  <!--   <input type="password" aria-label="Last name" class="form-control" id="input-password" placeholder="Password"> -->
+                  <!-- </div> -->
+                  <button type="button" class="btn btn-outline-secondary mt-2" id="start-btn">Start Game</button>
+                  </div>
+              <p class="card-footer"><small class="text-body-secondary" style="font-size: 16px;">*No real authentication implemented, just some basic permanence</small></p>
+
+                </div>
               </div>
             </div>
             <div id="game-screen" class="d-none">

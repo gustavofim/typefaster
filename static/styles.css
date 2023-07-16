@@ -50,6 +50,27 @@ body {
   font-size: x-large;
 }
 
+.text-body-secondary {
+  color: var(--fgColorGame);
+}
+
+#input-name {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+}
+
+#input-password {
+  color: var(--fgColor);
+  background-color: var(--bgColor);
+  border-color: var(--borderColor);
+}
+
+#start-btn {
+  border-color: var(--blueColor);
+  --bs-btn-hover-bg: var(--blueColor);
+}
+
 .card-header {
   color: var(--fgColor);
   background-color: var(--bgColor);
